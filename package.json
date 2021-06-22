@@ -1,0 +1,14 @@
+{
+  "name": "base-css",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --no-source-map src/scss/style.scss:dist/assets/css/style.css"
+  },
+  "author": "tanukichi5",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.35.1"
+  }
+}

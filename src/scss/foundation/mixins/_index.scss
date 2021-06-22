@@ -1,0 +1,18 @@
+//グローバルで使用するmixin
+
+@forward 'aspect-ratio';
+@forward 'col';
+@forward 'font-size';
+@forward 'hover';
+@forward 'lhCrop';
+@forward 'mediaQueries';
+@forward 'myfont';
+@forward 'object-fit';
+@forward 'replace';
+@forward 'state';
+@forward 'visually-hidden';
+
+@forward 'utility/reset-button';
+@forward 'utility/reset-input';
+@forward 'utility/reset-select';
+@forward 'utility/reset-textarea';

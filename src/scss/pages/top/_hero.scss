@@ -1,0 +1,6 @@
+@use '../../global' as *;
+
+.top-hero {
+  content: parent(".hoge .hoge__box");
+
+}//top-hero

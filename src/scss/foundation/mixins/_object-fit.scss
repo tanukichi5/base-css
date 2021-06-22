@@ -1,0 +1,7 @@
+//object-fit-images.jsが必須
+//npm install の時点で基本的に読み込まれている
+@mixin object-fit($type, $pos-x: 50%, $pos-y: 50%) {
+	object-fit: $type;
+	object-position: $pos-x $pos-y;
+	font-family: #{'"object-fit:'$type'; object-position:'$pos-x $pos-y'"'}
+}

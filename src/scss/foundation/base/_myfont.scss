@@ -1,0 +1,41 @@
+@font-face {
+	font-family: "myfont";
+	src: url('/assets/fonts/myfont.eot');
+	src: url('/assets/fonts/myfont.eot?#iefix') format('eot'),
+		url('/assets/fonts/myfont.woff') format('woff'),
+		url('/assets/fonts/myfont.ttf') format('truetype'),
+		url('/assets/fonts/myfont.svg#myfont') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.myfont {
+	display: inline-block;
+	font-family: "myfont";
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.myfont-lg {
+	font-size: 1.3333333333333333em;
+	line-height: 0.75em;
+	vertical-align: -15%;
+}
+.myfont-2x { font-size: 2em; }
+.myfont-3x { font-size: 3em; }
+.myfont-4x { font-size: 4em; }
+.myfont-5x { font-size: 5em; }
+.myfont-fw {
+	width: 1.2857142857142858em;
+	text-align: center;
+}
+.myfont-sns_facebook:before { content: "\EA01" }
+.myfont-sns_facebook2:before { content: "\EA02" }
+.myfont-sns_twitter:before { content: "\EA03" }
+.myfont-sns_line:before { content: "\EA04" }
+.myfont-sns_line2:before { content: "\EA05" }
+.myfont-sns_line3:before { content: "\EA06" }
+.myfont-sns_line4:before { content: "\EA07" }
+.myfont-sns-instagram:before { content: "\EA08" }
+

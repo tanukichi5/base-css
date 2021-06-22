@@ -1,0 +1,45 @@
+@use "sass:math";
+
+//親要素にdisplay: flex, flex-wrap: wrap;を指定していることを前提とする
+//カードレイアウトなどの横並び分割に使用
+//$col カラム数 $marginRight 右マージン $marginTop 上マージン $parent 親要素を指定
+@mixin col($col: 3, $marginRight: 0, $marginTop: 0, $parent: "none"){
+	width: calc((100% - #{$marginRight * $col +px} * (#{$col} - #{$col - 1})) / #{$col} - 0.1px);
+	margin-right: #{math.div($marginRight, 2) +px};
+	margin-left: #{math.div($marginRight, 2) +px};
+	margin-bottom: #{$marginTop+px};
+	@if $parent != "none"{
+		@at-root #{$parent} {
+			margin-right: -#{math.div($marginRight, 2) +px};
+			margin-left: -#{math.div($marginRight, 2) +px};
+			margin-bottom: -#{$marginTop+px};
+		}
+	}
+}
+
+
+//以下旧バージョン
+//$col カラム数 $marginRight 右マージン $marginTop 上マージン $start 横並び開始位置
+@mixin col_v1($col: 3, $marginRight: 15, $marginTop: 10, $start: 0){
+	width: calc((100% - #{$marginRight+px} * (#{$col} - 1)) / #{$col} - 0.1px);
+	margin-right: #{$marginRight+px};
+	margin-top: #{$marginTop+px};
+	&:nth-child(#{$col}n + #{$start}) {
+		margin-right: 0;
+	}
+	@if $start == 0  {
+		@for $i from 1 through $col {
+			&:nth-child(#{$i}) {
+				margin-top: 0;
+				@content;
+			}
+		}
+	} @else {
+		@for $i from 1 through $start {
+			&:nth-child(#{$i}) {
+				margin-top: 0;
+				@content;
+			}
+		}
+	}
+}

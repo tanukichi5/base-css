@@ -1,0 +1,90 @@
+@use '../functions/_is-inside' as *;
+
+//スマホではホバー効果を適用しないhover mixin
+//フォーカス時にもホバー効果を適用
+@mixin hover ($target: null, $mobile: false) {
+  @if $target == null {
+    @media (hover: hover) {
+      &:hover {
+        @content
+      }
+    }
+    //ie用(事前にjsでユーザーエージェントでbodyにclass付与)
+    @at-root .ua-ie &:hover {
+      @content;
+    }
+    //キーボードでフォーカスしたとき(主にtabキー移動)
+    //safariは「環境設定」の「詳細」タブで操作中の項目を強調表示にチェック
+    &.focus-visible:focus {
+      @at-root .js-focus-visible & {
+        @content
+      }
+    }
+    //スマホでホバー有効設定の場合
+    @if $mobile == true {
+      @media (hover: none) {
+        &:active {
+          @content
+        }
+      }
+    }
+  } @else {
+    //ネストの外か内を判定
+    @if is-inside($target) {
+      //ネストの内側
+      @media (hover: hover) {
+        @at-root #{selector-replace(&, $target, $target + ":hover")} {
+          @content
+        }
+      }
+      //ie用(事前にjsでユーザーエージェントでbodyにclass付与)
+      @at-root #{selector-replace(&, $target, $target + ":hover")} {
+        @at-root .ua-ie & {
+          @content;
+        }
+      }
+      //キーボードでフォーカスしたとき(主にtabキー移動)
+      @at-root #{selector-replace(&, $target, $target + ".focus-visible:focus")} {
+        @at-root .js-focus-visible & {
+          @content
+        }
+      }
+      //スマホでホバー有効設定の場合
+      @if $mobile == true {
+        @media (hover: none) {
+          @at-root #{selector-replace(&, $target, $target + ":active")} {
+            @content
+          }
+        }
+      }
+    } @else {
+      //ネストの外側
+      @media (hover: hover) {
+        @at-root #{$target + ":hover" + " " + &} {
+          @content
+        }
+      }
+      //ie用(事前にjsでユーザーエージェントでbodyにclass付与)
+      @at-root #{$target + ":hover" + " " + &} {
+        @at-root .ua-ie & {
+          @content
+        }
+      }
+      //キーボードでフォーカスしたとき(主にtabキー移動)
+      @at-root #{$target + ".focus-visible:focus" + " " + &} {
+        @at-root .js-focus-visible & {
+          @content
+        }
+      }
+      //スマホでホバー有効設定の場合
+      @if $mobile == true {
+        @media (hover: none) {
+          @at-root #{$target + ":active" + " " + &} {
+            @content
+          }
+        }
+      }
+    }
+  }
+}
+

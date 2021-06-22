@@ -1,0 +1,13 @@
+//@include myfont("\EA01", 13px, #000)
+@mixin myfont($code, $size, $color: $text-color){
+	display: block;
+	content: "#{$code}";
+	font-family: "myfont";
+	color: #{$color};
+	@if $size / 1px >= 10  {
+		@include font-size($size);
+	} @else {
+		@include font-size(10px);
+		transform: scale(#{$size / 10px});
+	}
+}

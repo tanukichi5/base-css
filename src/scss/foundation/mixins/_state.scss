@@ -1,0 +1,21 @@
+@use '../functions/_is-inside' as *;
+@use '../functions/_parent' as *;
+
+@mixin state ($target, $state) {
+  //ネストの外か内を判定
+  @if is-inside($target) {
+    @at-root #{selector-replace(&, $target, $target + $state)} {
+      @content
+    }
+  } @else {
+    @if $target == parent(#{&})  {
+      @at-root #{selector-replace(&, parent(#{&}), $target + $state)} {
+        @content
+      }
+    } @else {
+      @at-root #{selector-replace(&, parent(#{&}), $target + $state + " " + parent(#{&}))} {
+        @content
+      }
+    }
+  }
+}

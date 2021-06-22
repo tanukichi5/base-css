@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+@use 'foundation/base';
+
+//layout ページの骨格
+@use 'layout';
+
+//structure プラグインなどの外部からのDLしたcssなど
+@use "structure";
+
+//component 使いまわせるパーツ
+@use 'object/component';
+
+//project コンポーネントを含むパーツ
+@use 'object/project';
+
+//utility 微調整スタイル ※使いすぎはNG
+@use 'object/utility';
+
+//pages 各ページの固有スタイル
+@use 'pages/top';

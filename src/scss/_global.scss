@@ -1,0 +1,6 @@
+//変数やmixinなどを使用したい場合は以下のように読み込む
+//@use 'path/to/global' as *;
+
+@forward 'foundation/variables';
+@forward 'foundation/functions';
+@forward 'foundation/mixins';

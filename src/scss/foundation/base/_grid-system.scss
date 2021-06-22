@@ -1,0 +1,89 @@
+@use "sass:math";
+@use '../../global' as *;
+
+// グリッドシステムcssジェネレーターです
+
+//使い方
+// <div class="p-row">
+// 	<div class="p-col-tb-6">
+// 	</div>
+// 	<div class="p-col-tb-6">
+// 	</div>
+// </div>
+//上記はタブレット以上の幅で2カラム
+//※仕組みはBootstrapのグリッドシステムとほぼ同じ
+
+//余白（margin）が欲しい場合
+// <div class="p-row -margin-tb-50 -notgrid-margin-sp-y-20">
+// 	<div class="p-col-tb-6">
+// 	</div>
+// 	<div class="p-col-tb-6">
+// 	</div>
+// </div>
+//上記は左右下に50px,グリッドでないとき下20pxの例
+
+// -margin-{$gridBreakpoints.key}-{$marginList[value]} 縦横余白
+// p-col-{$gridBreakpoints.key}-{num} カラムの幅
+
+// -notgrid-margin-{$gridBreakpoints.key}-y-{$marginList[value]} グリッドでないときの縦余白
+
+$gridBreakpoints: (
+  "sp-s": 599px,
+  "sp": 768px,
+  "tb": 1024px,
+  "pc": 1432px
+) !default;
+
+$marginList: 16, 24, 32 !default;;//marginリスト
+
+$gridBreakpointValues: map-values($gridBreakpoints);
+
+@function grid-12($x) {
+  $num : math.div(12, $x);
+  @return math.div(floor($num * 100), 100);
+}
+
+.p-row {
+  display: flex;
+  flex-wrap: wrap;
+  > * {
+    //グリッドでないときの下マージン
+    $count: 1;
+    @each $key, $breakpoint in $gridBreakpoints {
+      // @warn $gridBreakpointValues;
+      $count: $count + 1;
+      @each $margin in $marginList {
+        @if (length($gridBreakpointValues) >= $count) {
+          @include max-screen(nth($gridBreakpointValues, $count)) {
+            // @warn $count;
+            @include state(".p-row", #{".-notgrid-margin-" + $key + "-y-" + $margin}) {
+              &:not(:first-child) {
+                margin-top: #{$margin + "px"};
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@each $key, $breakpoint in $gridBreakpoints {
+  @for $nam from 1 through 12 {
+    .p-col-#{$key}-#{$nam} {
+      width: 100%;
+    }
+    @include min-screen($breakpoint + 1) { //サイトのブレイクポイントがmax-screenであるため+1している
+      .p-col-#{$key}-#{$nam} {
+        @include col(grid-12($nam));
+        @each $margin in $marginList {
+          @include state(".p-row", #{".-margin-" + $key + "-" + $margin}) {
+            @include col(grid-12($nam), $margin, $margin, #{".p-row.-margin-" + $key + "-" + $margin});
+          }
+        }
+      }
+    }
+  }
+}
+

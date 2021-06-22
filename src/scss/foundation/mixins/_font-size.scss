@@ -1,0 +1,7 @@
+@use "sass:math";
+@use '../functions/_remove-unit' as *;
+
+@mixin font-size($size, $base: 16px) {
+	$rem: math.div(remove-unit($size), remove-unit($base)) * 1rem;
+	font-size:$rem;
+}

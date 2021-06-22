@@ -1,0 +1,9 @@
+@use "sass:math";
+
+//単位を取り除く関数です
+@function remove-unit($number) {
+	@return math.div($number, $number * 0 + 1);
+}
+
+//remove-unit(12px)
+//結果:12

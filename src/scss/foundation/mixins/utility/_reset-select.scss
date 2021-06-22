@@ -1,0 +1,12 @@
+@mixin reset-select() {
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+}

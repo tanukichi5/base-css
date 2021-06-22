@@ -1,0 +1,19 @@
+@mixin aspect-ratio($width, $height, $first: true) {
+  position: relative;
+ 
+  &::before {
+    content: '';
+    display: block;
+    padding-top: ($height / $width) * 100%;
+  }
+
+  @if $first == true {
+    & > :first-child {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

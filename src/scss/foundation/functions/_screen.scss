@@ -1,0 +1,8 @@
+//ブレイクポイントを返す関数です
+
+@function screen($size) {
+  @return map-get($breakpoints, $size);
+}
+
+//screen('md')
+//結果:768px

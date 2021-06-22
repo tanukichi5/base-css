@@ -1,0 +1,4 @@
+//指定したclassがネスト内にあるかチェック
+@function is-inside($target) {
+  @return if("#{selector-replace(&, $target, ".replaced")}" != "#{&}", true, false);
+}
